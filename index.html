@@ -1,821 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --accent: #14b8a6;
-            --light-bg: #f8fafc;
-            --dark-bg: #0f172a;
-            --card-bg: #1e293b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #16213e 100%);
-            font-family: 'Poppins', sans-serif;
-            color: #e2e8f0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Animated gradient background */
-        @keyframes gradientShift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        /* Navigation Container */
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .logo {
-            color: #fff;
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        ul {
-            list-style-type: none;
-            display: flex;
-            gap: 2rem;
-            flex-direction: row;
-        }
-
-        li {
-            margin: 0;
-        }
-
-        a {
-            color: #cbd5e1;
-            text-decoration: none;
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6366f1, #ec4899);
-            transition: width 0.3s ease;
-        }
-
-        a:hover {
-            color: #fff;
-        }
-
-        a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .head {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 100vh;
-            margin-left: 6rem;
-            float: left;
-            animation: fadeInLeft 1s ease-out;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        #para {
-            color: #a78bfa;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .head h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-            background: linear-gradient(135deg, #6366f1, #ec4899, #14b8a6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
-        }
-
-        .head p {
-            font-size: 1rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-top: 1.5rem;
-            max-width: 500px;
-        }
-
-        /* Profile Image */
-        img {
-            position: absolute;
-            right: 5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.3), 0 0 100px rgba(236, 72, 153, 0.1);
-            width: 350px;
-            height: 350px;
-            object-fit: cover;
-            animation: fadeInRight 1s ease-out;
-            border: 2px solid rgba(99, 102, 241, 0.3);
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        img:hover {
-            transform: translateY(-50%) scale(1.02);
-            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.4), 0 0 120px rgba(236, 72, 153, 0.2);
-        }
-
-        /* Experience Section */
-        .experience-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.5), rgba(20, 184, 166, 0.05));
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            clear: both;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .experience-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 3rem;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .exp-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.4));
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exp-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .exp-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border-color: rgba(236, 72, 153, 0.5);
-        }
-
-        .exp-card:hover::before {
-            opacity: 1;
-        }
-
-        .exp-card .card-icon {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .exp-card .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 0.8rem;
-        }
-
-        .exp-card .card-desc {
-            font-size: 0.95rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .exp-card .card-year {
-            display: inline-block;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.1));
-            color: #a78bfa;
-            border: 1px solid rgba(99, 102, 241, 0.4);
-            border-radius: 20px;
-            padding: 0.4rem 1rem;
-            font-weight: 600;
-        }
-
-        /* Contact Section */
-        #farm {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 4rem 0 2rem;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
-            margin: 3rem 0;
-        }
-
-        /* Form Styling */
-        .form-wrapper {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.4));
-            border-radius: 16px;
-            padding: 2.5rem;
-            max-width: 500px;
-            margin: 0 auto 4rem;
-            font-family: 'Inter', sans-serif;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .form-wrapper h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0 0 0.5rem;
-        }
-
-        .form-wrapper p {
-            font-size: 0.95rem;
-            color: #cbd5e1;
-            margin: 0 0 1.5rem;
-            line-height: 1.6;
-        }
-
-        .form-row {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.3rem;
-            gap: 0.5rem;
-        }
-
-        .form-row label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #a78bfa;
-        }
-
-        .form-row input {
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            background: rgba(15, 23, 42, 0.5);
-            color: #f1f5f9;
-            outline: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .form-row input::placeholder {
-            color: #64748b;
-        }
-
-        .form-row input:focus {
-            border-color: #6366f1;
-            background: rgba(99, 102, 241, 0.05);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-        }
-
-        .message-row {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.3rem;
-            gap: 0.5rem;
-        }
-
-        .message-row label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #a78bfa;
-        }
-
-        .message-row textarea {
-            height: 120px;
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            background: rgba(15, 23, 42, 0.5);
-            color: #f1f5f9;
-            resize: vertical;
-            outline: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .message-row textarea::placeholder {
-            color: #64748b;
-        }
-
-        .message-row textarea:focus {
-            border-color: #6366f1;
-            background: rgba(99, 102, 241, 0.05);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-        }
-
-        .send-btn {
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            color: #fff;
-            border: none;
-            padding: 0.9rem 2.5rem;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .send-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ec4899, #6366f1);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .send-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
-            letter-spacing: 0.5px;
-        }
-
-        .send-btn:active {
-            transform: translateY(0);
-        }
-
-        .contact-info {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            line-height: 1.8;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .contact-info span {
-            font-weight: 700;
-            color: #a78bfa;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            img {
-                position: relative;
-                right: auto;
-                top: auto;
-                transform: none;
-                width: 100%;
-                max-width: 300px;
-                margin: 2rem auto;
-                display: block;
-            }
-
-            .head {
-                margin-left: 2rem;
-                min-height: auto;
-                margin-bottom: 2rem;
-            }
-
-            .head h1 {
-                font-size: 2.5rem;
-            }
-
-            ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-            }
-
-            .form-wrapper {
-                padding: 1.5rem;
-                margin: 0 1rem 2rem;
-            }
-        }
-
-        /* Footer Styling */
-        footer {
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(10, 15, 30, 0.99));
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            padding: 3rem 2rem 1.5rem;
-            margin-top: 4rem;
-            font-family: 'Inter', sans-serif;
-            animation: fadeInUp 1s ease-out 0.8s both;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section p {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding-left: 0;
-        }
-
-        .footer-links a::before {
-            content: '→';
-            position: absolute;
-            left: -20px;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #6366f1;
-            padding-left: 20px;
-        }
-
-        .footer-links a:hover::before {
-            opacity: 1;
-            left: 0;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 50%;
-            color: #a78bfa;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .social-links a:hover {
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            border-color: transparent;
-            color: #fff;
-            transform: translateY(-5px) rotate(5deg);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-bottom p {
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-
-        .footer-bottom a {
-            color: #a78bfa;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-bottom a:hover {
-            color: #6366f1;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio · minimal white + green/blue</title>
+  <!-- Fonts & icons (feather / tabler) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.30.0/tabler-icons.min.css">
+  <style>
+    /* ----- RESET & BASE (white-minimal with green/blue touch) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f9fafb;
+      --light-gray: #f1f5f9;
+      --soft-gray: #e9edf2;
+      --slate: #475569;
+      --dark-slate: #1e293b;
+      --green: #2e9a8a;        /* elegant green */
+      --green-light: #e6f5f2;
+      --blue: #4f8cf7;         /* clean blue */
+      --blue-light: #eef3fe;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.02);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.02);
+      --shadow-lg: 0 24px 48px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.03);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    body {
+      background: var(--white);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--dark-slate);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ----- TYPOGRAPHY (clean, modern) ----- */
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ----- LAYOUT CONTAINERS ----- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- NAVIGATION (white minimal) ----- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      background: linear-gradient(145deg, var(--green), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--slate);
+      padding: 0.4rem 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--dark-slate);
+      border-bottom-color: var(--green);
+    }
+
+    /* ----- HERO SECTION (white, green/blue accents) ----- */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 2rem 3rem;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1 1 380px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green);
+      font-weight: 500;
+      font-size: 0.8rem;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0.5rem 0 0.8rem;
+      color: var(--dark-slate);
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(145deg, var(--green), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--slate);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-desc {
+      color: #5a6a7e;
+      max-width: 440px;
+      font-size: 1rem;
+      margin: 1.2rem 0 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-image {
+      flex: 0 0 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 18px 40px -12px rgba(46, 154, 138, 0.18), 0 8px 24px rgba(79, 140, 247, 0.08);
+      border: 4px solid white;
+      transition: var(--transition);
+      background: var(--off-white);
+    }
+
+    .hero-image img:hover {
+      transform: scale(1.01);
+      box-shadow: 0 24px 48px -16px rgba(46, 154, 138, 0.25);
+    }
+
+    /* ----- SECTION TITLES (green/blue) ----- */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 650;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title span {
+      background: linear-gradient(145deg, var(--green), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ----- EXPERIENCE CARDS (white minimal + green/blue) ----- */
+    .experience-section {
+      padding: 3rem 2rem 4rem;
+      background: var(--off-white);
+      border-radius: var(--radius) var(--radius) 0 0;
+      margin: 0 0.5rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .exp-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 2rem 1.8rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .exp-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(46, 154, 138, 0.12);
+    }
+
+    .exp-card .card-icon {
+      font-size: 2.8rem;
+      display: inline-block;
+      background: var(--green-light);
+      width: 68px;
+      height: 68px;
+      line-height: 68px;
+      border-radius: 40px;
+      color: var(--green);
+      margin-bottom: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .exp-card:hover .card-icon {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    .exp-card .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--dark-slate);
+    }
+
+    .exp-card .card-desc {
+      font-size: 0.9rem;
+      color: var(--slate);
+      margin: 0.5rem 0 1.2rem;
+      line-height: 1.5;
+    }
+
+    .exp-card .card-year {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--blue-light);
+      color: var(--blue);
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      letter-spacing: 0.2px;
+    }
+
+    /* ----- CONTACT / FORM (white, subtle green/blue) ----- */
+    .contact-wrap {
+      max-width: 580px;
+      margin: 2rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .form-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .form-card h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-card .form-sub {
+      color: var(--slate);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .form-row {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-row label {
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--dark-slate);
+      letter-spacing: 0.2px;
+    }
+
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--soft-gray);
+      border-radius: 14px;
+      font-size: 0.95rem;
+      background: var(--off-white);
+      transition: var(--transition);
+      font-family: inherit;
+      color: var(--dark-slate);
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(46, 154, 138, 0.08);
+      background: white;
+    }
+
+    .form-row textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, var(--green), #1f7a6d);
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-weight: 550;
+      color: white;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(46, 154, 138, 0.15);
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.01);
+      box-shadow: 0 8px 20px rgba(46, 154, 138, 0.2);
+      background: linear-gradient(145deg, #2a8f7e, #1a6e61);
+    }
+
+    .contact-meta {
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--soft-gray);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--slate);
+    }
+
+    .contact-meta strong {
+      color: var(--dark-slate);
+      font-weight: 500;
+    }
+
+    .contact-meta span {
+      background: var(--green-light);
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+      color: var(--green);
+      font-weight: 450;
+    }
+
+    /* ----- FOOTER (white minimal) ----- */
+    footer {
+      background: white;
+      border-top: 1px solid var(--soft-gray);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--soft-gray);
+    }
+
+    .footer-col h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--dark-slate);
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.9rem;
+      color: var(--slate);
+      line-height: 1.7;
+      display: block;
+      transition: var(--transition);
+    }
+
+    .footer-col a:hover {
+      color: var(--green);
+      padding-left: 4px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      background: var(--off-white);
+      color: var(--slate);
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+
+    .social-icons a:hover {
+      background: var(--green-light);
+      color: var(--green);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--slate);
+    }
+
+    .footer-bottom span {
+      color: var(--green);
+      font-weight: 450;
+    }
+
+    /* ----- RESPONSIVE TWEAKS ----- */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        padding: 1rem 1.2rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .hero {
+        padding: 2rem 1.2rem;
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-image img {
+        max-width: 200px;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-wrap {
+        padding: 0 1rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-meta {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="logo">
-            <h1>Code Academy</h1>
-        </div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Downloads</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">✦ code.academy</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
 
-        </ul>
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero-content">
+      <div class="hero-badge">✦ frontend · UI/UX</div>
+      <h1>Hello, I'm <span>Tayyeb</span></h1>
+      <p class="hero-sub">Frontend developer &amp; designer</p>
+      <p class="hero-desc">
+        Crafting clean, responsive interfaces with a modern touch. 
+        Passionate about elegant solutions and meaningful user experiences.
+      </p>
     </div>
-    <div class="head">
-        <p id="para">Hello,I'm</p>
-        <h1>Tayyeb Abdullah</h1>
-        <p id="para">Frontend Developer </p>
-        <p>I'm a passionate frontend developer who loves building beautiful <br> and responsive websites.</p>
+    <div class="hero-image">
+      <!-- using local image: images/profile.png -->
+      <img src="images/profile.png" alt="Tayyeb Abdullah profile">
     </div>
-    <img class="Img" src="Images/Profile.png" alt="Images" width="400px">
+  </section>
 
-    <section class="experience-section">
-        <h2>Experience</h2>
-        <div class="cards-grid">
-
-            <div class="exp-card">
-                <div class="card-icon"><i class="ti ti-code"></i></div>
-                <div class="card-title">Frontend Developer</div>
-                <div class="card-desc">I make HTML, CSS, JavaScript and React responsive websites.</div>
-                <span class="card-year">2022 – Present</span>
-            </div>
-
-            <div class="exp-card">
-                <div class="card-icon"><i class="ti ti-server"></i></div>
-                <div class="card-title">Backend Learner</div>
-                <div class="card-desc">I and developind Node.js, Express and databases with full stack skills.</div>
-                <span class="card-year">2023 – Present</span>
-            </div>
-
-            <div class="exp-card">
-                <div class="card-icon"><i class="ti ti-device-laptop"></i></div>
-                <div class="card-title">UI/UX Design</div>
-                <div class="card-desc">I have passion to make Clean aur user-friendly interfaces design.</div>
-                <span class="card-year">2022 – Present</span>
-            </div>
-
-        </div>
-    </section>
-    <h2 id="farm">Contact Us</h2>
-
-    <div class="form-wrapper">
-        <h2>Send us a message</h2>
-        <p>Have a question or want to work together? Fill out the form below and we will respond as soon as possible.
-        </p>
-
-        <div class="form-row">
-            <label>Name</label>
-            <input type="text" placeholder="Your full name" />
-        </div>
-
-        <div class="form-row">
-            <label>Email</label>
-            <input type="email" placeholder="you@example.com" />
-        </div>
-
-        <div class="form-row">
-            <label>City</label>
-            <input type="text" placeholder="Your city" />
-        </div>
-
-        <div class="message-row">
-            <label>Message</label>
-            <textarea placeholder="Write your message"></textarea>
-        </div>
-
-        <button class="send-btn">Send Message</button>
-
-        <div class="contact-info">
-            <div><span>Email:</span> amtayyeb8865@gmail.com</div>
-            <div><span>Phone:</span> 03700732535</div>
-        </div>
+  <!-- EXPERIENCE -->
+  <section class="experience-section">
+    <h2 class="section-title"><span>✦ experience</span></h2>
+    <div class="cards-grid">
+      <div class="exp-card">
+        <div class="card-icon"><i class="ti ti-code"></i></div>
+        <div class="card-title">Frontend</div>
+        <div class="card-desc">HTML, CSS, JavaScript · React &amp; responsive design.</div>
+        <span class="card-year">2022 – present</span>
+      </div>
+      <div class="exp-card">
+        <div class="card-icon"><i class="ti ti-server"></i></div>
+        <div class="card-title">Backend</div>
+        <div class="card-desc">Node.js, Express, databases — full‑stack journey.</div>
+        <span class="card-year">2023 – present</span>
+      </div>
+      <div class="exp-card">
+        <div class="card-icon"><i class="ti ti-device-laptop"></i></div>
+        <div class="card-title">UI/UX</div>
+        <div class="card-desc">Clean, user‑friendly interfaces with a design eye.</div>
+        <span class="card-year">2022 – present</span>
+      </div>
     </div>
+  </section>
 
-    <br><br>
-    <hr>
-    <br>
+  <!-- CONTACT (white minimal) -->
+  <div class="contact-wrap">
+    <h2 class="section-title" style="font-size:1.8rem; margin-bottom:1rem;"><span>✦ contact</span></h2>
+    <div class="form-card">
+      <h2>Let’s connect</h2>
+      <p class="form-sub">Have a project or idea? Reach out — I’ll respond within 24h.</p>
+      
+      <div class="form-row">
+        <label>Full name</label>
+        <input type="text" placeholder="Tayyeb Abdullah" />
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" placeholder="hello@example.com" />
+      </div>
+      <div class="form-row">
+        <label>City</label>
+        <input type="text" placeholder="Pakistan" />
+      </div>
+      <div class="form-row">
+        <label>Message</label>
+        <textarea placeholder="Tell me about your project..."></textarea>
+      </div>
+      
+      <button class="btn-primary">Send message →</button>
+      
+      <div class="contact-meta">
+        <span>✉️ <strong>Email</strong> amtayyeb8865@gmail.com</span>
+        <span>📞 <strong>Phone</strong> 0370‑0732535</span>
+      </div>
+    </div>
+  </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About Me</h3>
-                <p>I'm a passionate frontend developer dedicated to creating beautiful, responsive, and user-friendly
-                    websites that make an impact.</p>
-                <div class="social-links">
-                    <a href="#" title="GitHub">📱</a>
-                    <a href="#" title="LinkedIn">💼</a>
-                    <a href="#" title="Twitter">🐦</a>
-                    <a href="#" title="Email">✉️</a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <div class="footer-links">
-                    <a href="#">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Experience</a>
-                    <a href="#">Services</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Services</h3>
-                <div class="footer-links">
-                    <a href="#">Web Design</a>
-                    <a href="#">Development</a>
-                    <a href="#">UI/UX Design</a>
-                    <a href="#">Consulting</a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p><strong>Email:</strong><br>amtayyeb8865@gmail.com</p>
-                <p><strong>Phone:</strong><br>03700732535</p>
-                <p><strong>Location:</strong><br>Pakistan</p>
-            </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>✦ about</h4>
+        <p>Passionate frontend developer crafting clean, modern interfaces with a green‑blue touch.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="github"><i class="ti ti-brand-github"></i></a>
+          <a href="#" aria-label="linkedin"><i class="ti ti-brand-linkedin"></i></a>
+          <a href="#" aria-label="twitter"><i class="ti ti-brand-twitter"></i></a>
+          <a href="#" aria-label="email"><i class="ti ti-mail"></i></a>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 <a href="#">Tayyeb Abdullah</a>. All rights reserved.</p>
-            <p>Made with <span style="color: #ec4899;">❤</span> by Code Academy</p>
-        </div>
-    </footer>
-
+      </div>
+      <div class="footer-col">
+        <h4>quick</h4>
+        <a href="#">Home</a>
+        <a href="#">Work</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>services</h4>
+        <a href="#">Web design</a>
+        <a href="#">Development</a>
+        <a href="#">UI/UX</a>
+        <a href="#">Consulting</a>
+      </div>
+      <div class="footer-col">
+        <h4>contact</h4>
+        <p><strong>Email</strong><br>amtayyeb8865@gmail.com</p>
+        <p><strong>Phone</strong><br>0370‑0732535</p>
+        <p><strong>Location</strong><br>Pakistan</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 <a href="#" style="color:var(--dark-slate); font-weight:500;">Tayyeb Abdullah</a> · all rights reserved</span>
+      <span>made with <span style="color: var(--green);">❤</span> by Code Academy</span>
+    </div>
+  </footer>
 </body>
-
 </html>
